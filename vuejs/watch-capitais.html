@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <script src="vue.js"></script>
+    <title>V-For</title>
+</head>
+<body>
+<div id="app">
+    <button @click="pucharPaises">PUXAR</button>
+    {{paises}}
+    <select name="paises" id="paises">
+        <option v-for="pais in paises"></option>
+    </select>
+</div>
+<script>
+    const vm = new Vue({
+        el: "#app",
+        data: {
+            paises: {},
+        },
+        methods: {
+            puxarPaises() {
+                fetch('https://api.countrylayer.com/v2/all?access_key=e4c3434240171fe473139abd6cb51a31')
+                    .then(res => res.json())
+                    .then(res => {
+                        this.paises = res;
+                    })
+            }
+        },
+        computed: {}
+    })
+</script>
+</body>
+</html>

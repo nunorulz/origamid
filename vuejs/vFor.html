@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="vue.js"></script>
+    <title>V-For</title>
+</head>
+<body>
+<div id="app">
+    <ul>
+        <li v-for="(fruta, index) in frutas">{{fruta}} {{index}}</li>
+        <li v-for="({nome, populacao}, key) in estados :key="">
+            {{nome}}
+            {{populacao}}
+        </li>
+    </ul>
+</div>
+
+<script>
+    const vm = new Vue({
+        el: "#app",
+        data: {
+            frutas: ["Banana", "Uva", "Laranja"],
+            estados:{
+                sp:{
+                    populacao: "45 milhões",
+                    nome: "São Paulo"
+                },
+                mg:{
+                    populacao: "21 milhões",
+                    nome: "Minas Gerais"
+                },
+                rj:{
+                    populacao: "17 milhões",
+                    nome: "Rio de Janeiro"
+                }
+            }
+        },
+    })
+</script>
+</body>
+</html>

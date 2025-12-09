@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="vue.js"></script>
+    <title>V-HTML e V-Text</title>
+</head>
+<body>
+<div id="app">
+    {{fruta}}
+    <p v-text="fruta"></p>
+</div>
+
+<script>
+    const vm = new Vue({
+        el: "#app",
+        data: {
+            link: "<a href='https://google.com'>Google</a>",
+            fruta: "Banana",
+            total: 150,
+        },
+
+    })
+</script>
+</body>
+</html>
