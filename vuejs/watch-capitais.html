@@ -8,16 +8,20 @@
 </head>
 <body>
 <div id="app">
-    <button @click="pucharPaises">PUXAR</button>
-    {{paises}}
-    <select name="paises" id="paises">
-        <option v-for="pais in paises"></option>
+    <button @click="puxarPaises">PUXAR</button>
+    <select name="paises" id="paises" v-model="paisSelecionado">
+        <option v-for="pais in paises" :value="pais.name">
+            {{pais.name}}
+        </option>
     </select>
+    <p>{{capitais.capital}}</p>
 </div>
 <script>
     const vm = new Vue({
         el: "#app",
         data: {
+            paisSelecionado: "",
+            capitais: "",
             paises: {},
         },
         methods: {
@@ -29,7 +33,11 @@
                     })
             }
         },
-        computed: {}
+        watch: {
+            paisSelecionado(valor){
+                this.capitais = this.paises.find((pais) => pais.name === valor);
+            }
+        }
     })
 </script>
 </body>
