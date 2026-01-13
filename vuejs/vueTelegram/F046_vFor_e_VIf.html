@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>V-if e V-else</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+
+</head>
+<body>
+<div id="app">
+    <h1>Tarefas</h1>
+    <ul>
+        <li v-for="tarefa in tarefas" :key="tarefa.id" v-if="!tarefa.completa">{{tarefa.titulo}}</li>
+    </ul>
+
+    <h1>Tarefas a fazer</h1>
+    <ul v-if="tarefasIncompletas.length">
+        <li v-for="tarefa in tarefasIncompletas" :key="tarefa.id">{{tarefa.titulo}}</li>
+    </ul>
+    <p v-else>Não existem tarefas a fazer.</p>
+</div>
+
+<script type="text/javascript">
+    const vm = new Vue({
+        el: "#app",
+        data: {
+            tarefas: [
+                {id: 1, titulo: 'Aprender JavaScript', completa: true},
+                {id: 2, titulo: 'Aprender VueJs', completa: true},
+                {id: 3, titulo: 'Aprender Vuex', completa: true},
+                {id: 4, titulo: 'Aprender VueRouter', completa: true}
+            ]
+        },
+        computed: {
+            tarefasIncompletas(){
+                return this.tarefas.filter(function(tarefa){
+                    return !tarefa.completa;
+                })
+            }
+        }
+    });
+</script>
+</body>
+</html>

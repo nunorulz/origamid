@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="../vue.js"></script>
+    <title>Computed and Properties - F021</title>
+</head>
+<body>
+    <div id="app">
+        <p>{{ curso }} => {{cursoInvertido}}</p>
+        <input @keyup.enter="alterarNomeDoCurso">
+    </div>
+
+    <script type="text/javascript">
+        const vm = new Vue({
+            el: '#app',
+            data: {
+                curso: 'Curso de Vue.js'
+            },
+            computed:{
+                cursoInvertido(){
+                    return this.curso.split('').reverse().join('');
+                }
+            },
+            methods: {
+                alterarNomeDoCurso(event){
+                    this.curso = event.target.value
+                }
+            }
+        });
+    </script>
+</body>
+</html>

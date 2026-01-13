@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+    <title>V-if e V-else - F035</title>
+</head>
+<body>
+<div id="app">
+    <h1>Produtos</h1>
+  <ul>
+    <li v-for="valor in produtos">{{ valor }}</li>
+  </ul>
+  <ul>
+    <li v-for="(valor, chave) in produtos">{{ chave }}: {{ valor }} </li>
+  </ul>
+  <ul>
+    <li v-for="(valor, chave, indice) in produtos">{{indice}}.{{ chave }}: {{ valor }} </li>
+  </ul>
+
+</div>
+
+<script type="text/javascript">
+    const vm = new Vue({
+        el: "#app",
+        data: {
+            produtos: {
+                id: 1,
+              nome: 'Teclado',
+              marca: 'Dell',
+              valor: 100
+            }
+        }
+    });
+</script>
+</body>
+</html>

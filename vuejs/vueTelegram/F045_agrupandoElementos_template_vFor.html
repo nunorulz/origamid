@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>V-if e V-else</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+    <style>
+        .separador{
+            list-style-type: none;
+            border-bottom: 1px solid #303030;
+        }
+    </style>
+</head>
+<body>
+<div id="app">
+    <h1>Produtos</h1>
+    <ul>
+        <template v-for="produto in produtos">
+            <li>{{produto.nome}}</li>
+            <li class="separador"></li>
+        </template>
+    </ul>
+</div>
+
+<script type="text/javascript">
+    const vm = new Vue({
+        el: "#app",
+        data: {
+            produtos: [
+                {id: 1, nome: 'Monitor'},
+                {id: 2, nome: 'Teclado'},
+                {id: 3, nome: 'Mouse'},
+                {id: 4, nome: 'Processador'}
+            ]
+        },
+    });
+</script>
+</body>
+</html>
