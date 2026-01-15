@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>V-if e V-else</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+
+</head>
+<body>
+<div id="app">
+    <h1>Produtos</h1>
+    <ul>
+        <li v-for="(valor, chave) in produto">
+            {{chave}}: {{valor}}
+        </li>
+    </ul>
+    <button @click="adicionarPropriedade">Adicionar propriedade</button>
+    <button @click="substituirObjeto">Substituir objeto</button>
+
+</div>
+
+<script type="text/javascript">
+    const vm = new Vue({
+        el: "#app",
+        data: {
+            produto: {
+                id: 1,
+                nome: 'Monitor',
+                marca: 'Dell'
+            }
+        },
+        methods: {
+            adicionarPropriedade(event){
+            //Vue.set(this.produto, 'preço', 100);
+            this.$set(this.produto, 'preço', 200)
+            },
+            substituirObjeto(event){
+                /*Object.assign(this.produto, {
+                    preço: 150,
+                    cor: 'Preto' //Não é reativo
+                })*/
+                this.produto = Object.assign({}, this.produto,{
+                    preço: 50,
+                    cor: 'Prata'
+                })
+            }
+        }
+    });
+</script>
+</body>
+</html>
