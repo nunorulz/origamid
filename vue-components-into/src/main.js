@@ -1,57 +1,19 @@
 import Vue from 'vue'
+import App from "@/App.vue";
+//import Contador from './ContadorBase.vue'
 
-/*Vue.component('br-component', {
-    data() {
-        return {
-            titulo: "Curso de Vue Js",
-            contador: 0
-        }
-    },
-    methods: {
-        incrementar() {
-            this.contador++
-        }
-    },
-    template: `
-    <div>
-      <h1>{{ titulo }}</h1>
-      <button @click="incrementar">
-        Clicado {{ contador }} vezes
-      </button>
-    </div>
-  `
-})*/
+//import AppHeader from "@/AppHeader.vue";
 
-const brComponent = {
 
-    data() {
-        return {
-            titulo: "Curso de Vue Js",
-            contador: 0
-        }
-    },
-    methods: {
-        incrementar() {
-            this.contador++
-        }
-    },
-    template: `
-    <div>
-      <h1>{{ titulo }}</h1>
-      <button @click="incrementar">
-        Clicado {{ contador }} vezes
-      </button>
-    </div>
-  `
-}
+//Vue.component('AppHeader', AppHeader)
 
 new Vue({
-    el: '#app1',
-    components: {
-        'br-component': brComponent
-    }
+    el: '#app',
+    render: h => h(App)
 })
 
+/* Outra maneira de renderizar o app
 new Vue({
-    el: '#app2'
-})
+   render: h => h(App)
+}).$mount('#app')
+*/
