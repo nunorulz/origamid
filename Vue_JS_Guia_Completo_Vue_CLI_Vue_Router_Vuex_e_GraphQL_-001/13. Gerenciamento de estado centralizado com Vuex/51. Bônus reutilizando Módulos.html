@@ -1,0 +1,10 @@
+<p>Poderão existir situações onde você vai precisar criar várias instâncias de um Módulo, por exemplo:</p><ul><li><p>Ao criar várias Stores que usam o mesmo Módulo (mais comum em SSR - Server Side Rendering);</p></li></ul><ul><li><p>Registrar o mesmo Módulo várias vezes na mesma Store</p></li></ul><p>Se usarmos um objeto simples para declarar o estado do Módulo, esse objeto de estado será compartilhado por referência e causará poluição entre estados da Store/Module quando ele sofrer uma mutação.</p><p>Este é exatamente o mesmo problema com os dados dentro dos componentes do Vue. Portanto, a solução também é a mesma - use uma função para declarar o estado do Módulo:</p><pre class="prettyprint linenums">const tarefasModule = {
+  state () {
+    return {
+      erro: undefined,
+      tarefas: [],
+      tarefaSelecionada: undefined
+    }
+  },
+  // mutations, actions, getters...
+}</pre><p>Referência: <a href="https://vuex.vuejs.org/guide/modules.html#module-reuse" rel="noopener noreferrer" target="_blank">https://vuex.vuejs.org/guide/modules.html#module-reuse</a></p>

@@ -1,0 +1,6 @@
+
+docker-machine create \
+	--driver digitalocean \
+	--digitalocean-access-token __TOKEN__ \
+	--digitalocean-size 1gb \
+	__YOUR_MACHINE_NAME__

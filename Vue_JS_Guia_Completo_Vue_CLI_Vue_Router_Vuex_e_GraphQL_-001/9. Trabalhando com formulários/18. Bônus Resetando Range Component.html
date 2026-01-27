@@ -1,0 +1,46 @@
+<p>Esta é uma "aula" onde faremos um ajuste no nosso Component Range.</p><p>O aluno Fábio notou um detalhe muito importante, da forma que implementamos o nosso campo personalizado na aula, a "label" dele não "reage" ao reset do formulário.</p><p>O motivo é bem simples: nós criamos um estado local dentro da instância do component:</p><pre class="prettyprint linenums">data() {
+    return {
+        valorAtual: this.valor || this.$attrs.min
+    }
+},</pre><p>E baseamos nossa Computed Property nesse estado:</p><pre class="prettyprint linenums">computed: {
+    customLabel() {
+        return `${this.label} (R$ ${this.valorAtual})` // aqui
+    }
+},</pre><p>A consequência disso é que ao resetar o formulário, somente a prop "valor" é atualizada, a prop "label" não, e portanto a Computed Property não precisa ser recalculada.</p><p>Para ajustar isso é muito simples:</p><ol><li><p>Vamos remover o estado local do Component</p></li><li><p>E vamos passar a basear nossa Computed Property na prop "value"</p></li></ol><p>O Component fica assim:</p><pre class="prettyprint linenums">&lt;template&gt;
+  &lt;div&gt;
+    &lt;label&gt;{&zwnj;{ customLabel }}&lt;/label&gt;
+    &lt;input
+      type="range"
+      v-bind="$attrs"
+      :value="valor"
+      :class="inputClasses"
+      @change="atualizar"
+    &gt;
+  &lt;/div&gt;
+&lt;/template&gt;
+
+&lt;script&gt;
+export default {
+  inheritAttrs: false,
+  model: {
+    prop: 'valor',
+    event: 'change'
+  },
+  props: {
+    label: String,
+    valor: [Number, String],
+    inputClasses: [String, Object, Array]
+  },
+  computed: {
+    customLabel () {
+      return `${this.label} (R$ ${this.valor || this.$attrs.min})`
+    }
+  },
+  methods: {
+    atualizar (event) {
+      const valor = event.target.value
+      this.$emit('change', valor)
+    }
+  }
+}
+&lt;/script&gt;</pre><p>Façam os testes, qualquer dúvida postem no fórum do curso.</p><p>Grande abraço,<br>Plínio Naves</p>

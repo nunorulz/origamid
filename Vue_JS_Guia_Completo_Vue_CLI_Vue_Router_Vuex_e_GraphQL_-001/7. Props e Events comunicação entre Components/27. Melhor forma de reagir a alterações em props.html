@@ -1,0 +1,13 @@
+<p>Na aula anterior fizemos um ajuste na aplicação para refletir o novo valor passado para a prop "filme" do Component "FilmesListaItenEditar" para a propriedade "filmeLocal".</p><p>O detalhe é que abordagem acarreta em uma mutação sendo causada dentro de uma Computed Property, e não é uma boa prática (infelizmente passou em branco na aula).</p><p>Para resolver basta usarmos um Watcher, deixe o código assim:</p><pre class="prettyprint linenums">computed: {
+    filmeSelecionado: {
+        ...
+        get() {
+            return this.filme // remova a atribuição
+        }
+    }
+},
+watch: {
+    filme(novoFilme) { // crie o watcher na prop "filme"
+        this.filmeLocal = Object.assign({}, novoFilme)
+    }
+}</pre><p>Obrigado ao aluno Thiago Rocha Soares por reportar esse detalhe <a href="https://www.udemy.com/instructor/communication/qa/8018506/detail/" rel="noopener noreferrer" target="_blank">neste tópico</a>.</p><p>Plínio Naves</p>

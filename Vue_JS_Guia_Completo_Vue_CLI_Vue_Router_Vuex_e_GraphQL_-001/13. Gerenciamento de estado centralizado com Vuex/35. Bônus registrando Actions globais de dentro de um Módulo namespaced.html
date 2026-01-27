@@ -1,0 +1,21 @@
+<p>É possível também registrar "Actions" no nível global, de dentro de Módulos "namespaced".</p><p>Para isso basta implementar a "Action" de forma desmembrada dentro de um objeto, e marcar a opção <code>root</code> como <code>true</code>.</p><p>Veja como fica:</p><pre class="prettyprint linenums">{
+  // nivel raiz/global
+  actions: {
+    algumaOutraAction ({dispatch}) {
+      dispatch('algumaAction')
+    }
+  },
+  modules: {
+    foo: {
+      namespaced: true,
+
+      // módulo
+      actions: {
+        algumaAction: {
+          root: true, // &lt;- AQUI
+          handler (namespacedContext, payload) { ... } // -&gt; 'algumaAction'
+        }
+      }
+    }
+  }
+}</pre><p>Referência: <a href="https://vuex.vuejs.org/guide/modules.html#register-global-action-in-namespaced-modules" rel="noopener noreferrer" target="_blank">https://vuex.vuejs.org/guide/modules.html#register-global-action-in-namespaced-modules</a></p><p>Plínio Naves</p>

@@ -1,0 +1,58 @@
+<p>A partir da versão 2.6.x do Vue, o uso de slots foi modificado/unificado.</p><p>Para saber todos os detalhes recomendo ler o <a href="https://medium.com/the-vue-point/vue-2-6-released-66aa6c8e785e" rel="noopener noreferrer" target="_blank">post do Evan You no Medium</a>.</p><p>Anteriormente tínhamos os atributos "slot" e "slot-scope", agora temos somente uma nova diretiva: "v-slot".</p><p>Veja alguns exemplos de como era antes, e como ficou agora para melhor entendimento:</p><p>IMPORTANTE: no component que define os slots, nada muda</p><p>Post.vue</p><pre class="prettyprint linenums">&lt;template&gt;
+    &lt;div class="post"&gt;
+
+        &lt;header&gt;
+            &lt;slot name="cabecalho"&gt;&lt;/slot&gt;
+        &lt;/header&gt;
+
+        &lt;section&gt;
+            &lt;slot&gt;&lt;/slot&gt; &lt;!-- slot default --&gt;
+        &lt;/section&gt;
+
+        &lt;footer&gt;
+            &lt;slot name="rodape"&gt;&lt;/slot&gt;
+        &lt;/footer&gt;
+
+    &lt;/div&gt;
+&lt;/template&gt;</pre><p>App.vue</p><pre class="prettyprint linenums">&lt;!-- antes --&gt;
+&lt;Post&gt;
+  &lt;h2 slot="cabecalho"&gt;Components no Vue&lt;/h2&gt;
+  &lt;p&gt;Components são uma das peças mais fundamentais no Vue&lt;/p&gt;
+  &lt;span&gt;...&lt;/span&gt;
+  &lt;small slot="rodape"&gt;por Plínio Naves&lt;/small&gt;
+&lt;/Post&gt;
+
+&lt;!-- depois --&gt;
+&lt;Post&gt;
+  &lt;h2 v-slot:cabecalho&gt;Components no Vue&lt;/h2&gt;
+  &lt;p&gt;Components são uma das peças mais fundamentais no Vue&lt;/p&gt;
+  &lt;span&gt;...&lt;/span&gt;
+  &lt;small v-slot:rodape&gt;por Plínio Naves&lt;/small&gt;
+&lt;/Post&gt;</pre><p>Scoped Slots agora são somente Slots, veja como ficou:</p><p>PostsLista.vue</p><pre class="prettyprint linenums">&lt;template&gt;
+    &lt;div&gt;
+
+        &lt;h2&gt;Lista de posts&lt;/h2&gt;
+
+        &lt;PostsListaIten
+            v-for="post in posts"
+            :key="post.id"
+            :post="post"&gt;
+                &lt;slot :meuPost="post"&gt;&lt;/slot&gt; &lt;!-- passagem da prop para o slot --&gt;
+        &lt;/PostsListaIten&gt;
+
+    &lt;/div&gt;
+&lt;/template&gt;</pre><p>App.vue</p><pre class="prettyprint linenums">&lt;!-- antes --&gt;
+&lt;PostsLista :posts="posts"&gt;
+   &lt;template slot-scope="{ meuPost }"&gt;
+      &lt;h2&gt;{&zwnj;{ meuPost.titulo }}&lt;/h2&gt;
+      &lt;p&gt;{&zwnj;{ meuPost.conteudo }}&lt;/p&gt;
+      &lt;small&gt;{&zwnj;{ meuPost.autor }}&lt;/small&gt;
+   &lt;/template&gt;
+&lt;/PostsLista&gt;
+
+&lt;!-- depois --&gt;
+&lt;PostsLista :posts="posts" v-slot="{ meuPost }"&gt;
+   &lt;h2&gt;{&zwnj;{ meuPost.titulo }}&lt;/h2&gt;
+   &lt;p&gt;{&zwnj;{ meuPost.conteudo }}&lt;/p&gt;
+   &lt;small&gt;{&zwnj;{ meuPost.autor }}&lt;/small&gt;
+&lt;/PostsLista&gt;</pre><p>Para mais detalhes de uso, dê uma olhada <a href="https://github.com/vuejs/rfcs/blob/master/active-rfcs/0001-new-slot-syntax.md" rel="noopener noreferrer" target="_blank">neste RFC</a>.</p><p>Grande abraço,<br>Plínio Naves</p>

@@ -1,0 +1,5 @@
+<p>Na aula anterior criamos a Computed Property "tarefasOrdenadas" para ordenar nossa lista de Tarefas.</p><p>O detalhe é que uma mutação está acontecendo pois o método ".sort" altera o array original, e isso não é uma boa prática dentro de Computed Properties.</p><p>Para resolver, basta chamar o "slice" antes do "sort" pois assim uma nova cópia do array será criada.</p><p>Deixe assim:</p><pre class="prettyprint linenums">computed: {
+    tarefasOrdenadas() {
+        return this.tarefas.slice().sort(... // chame o "slice" antes do "sort"
+            ...
+}</pre><p>Obrigado ao aluno Thiago Rocha Soares por reportar esse detalhe <a href="https://www.udemy.com/instructor/communication/qa/8049148/detail/" rel="noopener noreferrer" target="_blank">neste tópico</a>.</p><p>Plínio Naves</p>
